@@ -20,32 +20,43 @@ const Create = () => {
             return { ...Prev, [name]: value };
         });
     };
-    const HandleSubmit = (e) => {
+    // const HandleSubmit = (e) => {
+    //     e.preventDefault();
+    //     fetch("http://127.0.0.1:8000/blog/", {
+    //         method:"POST",
+    //         headers:{
+    //             'Accept':"application/json",
+    //             'Content-Type':"application/json"
+    //         },
+    //         body:JSON.stringify(formData)
+    //     })
+    //     .then(res => res.json())
+    //     .then(data => {
+    //         // enter you logic when the fetch is successful
+    //         console.log(data)
+    //     })
+    //     .catch(error => {
+    //     // enter your logic for when there is an error (ex. error toast)
+    //         console.log(error)
+    //     }) 
+    // }
+    const HandleSubmit = async (e) => {
         e.preventDefault();
-        fetch("http://127.0.0.1:8000/blog/", {
-            method:"POST",
-            headers:{
-                'Accept':"application/json",
-                'Content-Type':"application/json"
+        const response= await fetch("http://127.0.0.1:8000/blog/", {
+            method: "POST",
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json",
             },
-            body:JSON.stringify(formData)
-        })
-        .then(Response=>Response.json())
-        .then((result)=>{
-            console.log(result)
-        })
-        .then((error)=>{
-            console.log(error);
-        })
+            body: JSON.stringify(formData),
+        });
+        const data = await response.json();
+        console.log(data)
 
-
-
-
-        console.log(formData);
         const interval = setInterval(() => {
-            handleClose()
-          }, 1000);
-          return () => clearInterval(interval);
+            handleClose();
+        }, 1000);
+        return () => clearInterval(interval);
     };
 
     return (
@@ -136,6 +147,6 @@ const Create = () => {
             </Modal>
         </>
     );
-};
+    };
 
 export default Create;

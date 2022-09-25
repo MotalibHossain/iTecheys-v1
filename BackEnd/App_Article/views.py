@@ -19,16 +19,17 @@ def Article(request):
         return Response(serializer.data)
 
 
-    def startCall(request):
-        if request.method == "POST":
-            serializer = BlogSerializer(data=request.data)
-            if serializer.is_valid():
-                serializer.save()
-                return Response(serializer.data, status=status.HTTP_201_CREATED)
-            else:
-                return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-        #Return this if request method is not POST
-        return Response({'key': 'value'}, status=status.HTTP_200_OK)
+    if request.method == "POST":
+        print("post methode is calling==============================================")
+        serializer = BlogSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+            # return Response(serializer.data, status=status.HTTP_201_CREATED)
+        else:
+            return Response(serializer.errors)
+            # return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    #Return this if request method is not POST
 
 
 def ArticleDetails(request, id):

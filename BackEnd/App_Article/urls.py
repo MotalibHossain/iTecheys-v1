@@ -7,6 +7,6 @@ from django.conf.urls import include
 from App_Article.views import Article, ArticleDetails
 
 urlpatterns = [
-    path('article/', Article, name='article'),
+    path('blog/', Article, name='article'),
     path('article/details/<int:id>', ArticleDetails, name='ArticleDetails'),
 ]

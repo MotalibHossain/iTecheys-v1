@@ -40,7 +40,7 @@ const Blog = () => {
                                             />
                                             <div className="d-flex mt-1">Motalib Hossain</div>
                                         </div>
-                                        <p className="time mb-0 mt-1">1 week ago</p>
+                                        <p className="time mb-0 mt-1">{Item.publish_date}</p>
                                     </div>
                                     <div className="post">
                                         <h5 className="post-title mt-2">

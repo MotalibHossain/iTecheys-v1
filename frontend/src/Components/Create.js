@@ -10,11 +10,9 @@ const Create = () => {
     // save data
     const [category, setCategory] = useState([]);
     const [formData, SetFormData] = useState({
-        name: "",
-        category: "",
+        title: "",
         slug: "",
         description: "",
-        is_active: "",
     });
     const HandelChange = (e) => {
         const { name, value } = e.target;
@@ -24,8 +22,26 @@ const Create = () => {
     };
     const HandleSubmit = (e) => {
         e.preventDefault();
-        console.log(formData);
+        fetch("http://127.0.0.1:8000/blog/", {
+            method:"POST",
+            headers:{
+                'Accept':"application/json",
+                'Content-Type':"application/json"
+            },
+            body:JSON.stringify(formData)
+        })
+        .then(Response=>Response.json())
+        .then((result)=>{
+            console.log(result)
+        })
+        .then((error)=>{
+            console.log(error);
+        })
 
+
+
+
+        console.log(formData);
         const interval = setInterval(() => {
             handleClose()
           }, 1000);
@@ -53,30 +69,26 @@ const Create = () => {
                             <div className="row">
                                 <div className="col-md-6">
                                     <div className="form-group">
-                                        <label> Name</label>
+                                        <label> Title</label>
                                         <input
                                             type="text"
-                                            name="name"
+                                            name="title"
                                             className="form-control"
                                             placeholder=""
                                             onChange={HandelChange}
                                         />
                                     </div>
                                 </div>
-
                                 <div className="col-md-6">
                                     <div className="form-group">
-                                        <label>Catagory</label>
-                                        <select className="form-select" name="category" onChange={HandelChange}>
-                                            <option>Catagory</option>
-                                            {category.map((Item, index) => {
-                                                return (
-                                                    <option value={Item.id} key={index}>
-                                                        {Item.name}
-                                                    </option>
-                                                );
-                                            })}
-                                        </select>
+                                        <label> Slug</label>
+                                        <input
+                                            type="text"
+                                            name="slug"
+                                            className="form-control"
+                                            placeholder=""
+                                            onChange={HandelChange}
+                                        />
                                     </div>
                                 </div>
                             </div>
@@ -90,18 +102,6 @@ const Create = () => {
                                             className="form-control"
                                             id="description"
                                             placeholder="Description"
-                                            onChange={HandelChange}
-                                        />
-                                    </div>
-                                </div>
-                                <div className="col-md-6">
-                                    <div className="form-group">
-                                        <label>Slug</label>
-                                        <input
-                                            type="text"
-                                            name="slug"
-                                            className="form-control"
-                                            placeholder=""
                                             onChange={HandelChange}
                                         />
                                     </div>

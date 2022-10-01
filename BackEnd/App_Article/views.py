@@ -6,10 +6,19 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.response import Response
 from rest_framework import status
-from App_Article.models import Blog
-from App_Article.serializers import BlogSerializer
+from App_Article.models import Blog, BlogCategory
+from App_Article.serializers import BlogSerializer, BlogCategorySerializers
 
 # Create your views here.
+
+@api_view(['GET', 'POST'])
+def BlogCategories(request):
+    if request.method == 'GET':
+        all_category = BlogCategory.objects.all()
+        serializer = BlogCategorySerializers(all_category, many=True)
+        return Response(serializer.data)
+
+
 
 @api_view(['GET', 'POST'])
 def Article(request):

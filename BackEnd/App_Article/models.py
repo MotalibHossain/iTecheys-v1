@@ -10,7 +10,7 @@ class BlogCategory(models.Model):
 
 
 class Blog(models.Model):
-    # author=models.ForeignKey(User, on_delete=models.CASCADE, related_name="blog_author")
+    author=models.ForeignKey(User, on_delete=models.CASCADE, related_name="blog_author")
     title=models.CharField(max_length=80)
     category=models.ForeignKey(BlogCategory, on_delete=models.CASCADE, related_name="category_blog")
     slug=models.SlugField(max_length=80)

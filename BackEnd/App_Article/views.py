@@ -29,7 +29,7 @@ def Article(request):
 
 
     if request.method == "POST":
-        print("post methode is calling==============================================")
+        print("post methode is calling ==============================================")
         serializer = BlogSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
